@@ -1,0 +1,28 @@
+{
+  appId: "com.office.officehub",
+  productName: "Office Hub",
+  asar: true,
+  directories: { output: "release/${version}" },
+  files: ["dist", "dist-electron"],
+  extraResources: [
+    { from: "build-resources/default-settings.json", to: "default-settings.json" },
+    { from: "build-resources/office-ca.pem", to: "office-ca.pem" },
+  ],
+  win: {
+  target: [{ target: "nsis", arch: ["x64"] }],
+  artifactName: "${productName}-Setup-${version}.${ext}",
+  icon: "build-resources/icon.ico",
+  },
+  nsis: {
+    oneClick: false,
+    perMachine: false,
+    allowToChangeInstallationDirectory: true,
+    deleteAppDataOnUninstall: false,
+  },
+  linux: {
+  target: ["AppImage"],
+  artifactName: "${productName}-${version}.${ext}",
+  category: "Office",
+  icon: "build-resources/icon.png",
+  },
+}
